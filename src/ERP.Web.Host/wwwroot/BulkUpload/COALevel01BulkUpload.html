@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COA Level 01 Bulk Upload</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .result-container {
+            margin-top: 20px;
+            display: none;
+        }
+        .error-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chart of Accounts Level 01 - Bulk Upload</h2>
+        <div class="card">
+            <div class="card-header">
+                Upload Data
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="fileUpload" class="form-label">Select Excel File</label>
+                    <input class="form-control" type="file" id="fileUpload" accept=".xlsx, .xls">
+                    <div class="form-text">File should contain columns: Name, SerialNumber, AccountTypeName</div>
+                </div>
+                <div class="mb-3">
+                    <button id="uploadBtn" class="btn btn-primary">Upload</button>
+                    <a href="COALevel01Template.xlsx" class="btn btn-outline-secondary ms-2">Download Template</a>
+                </div>
+                <div id="preview" class="mt-4">
+                    <h5>Preview:</h5>
+                    <div class="table-responsive">
+                        <table id="previewTable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Serial Number</th>
+                                    <th>Account Type Name</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="resultContainer" class="card result-container">
+            <div class="card-header">
+                Upload Result
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h5>Total Items</h5>
+                                <h3 id="totalItems">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-success text-white">
+                            <div class="card-body text-center">
+                                <h5>Success</h5>
+                                <h3 id="successCount">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body text-center">
+                                <h5>Failed</h5>
+                                <h3 id="failureCount">0</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="errorSection" class="mt-4">
+                    <h5>Errors:</h5>
+                    <ul id="errorList" class="list-group error-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileUpload = document.getElementById('fileUpload');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const previewTable = document.getElementById('previewTable').getElementsByTagName('tbody')[0];
+            const resultContainer = document.getElementById('resultContainer');
+            const totalItems = document.getElementById('totalItems');
+            const successCount = document.getElementById('successCount');
+            const failureCount = document.getElementById('failureCount');
+            const errorList = document.getElementById('errorList');
+            
+            let excelData = [];
+
+            fileUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    excelData = XLSX.utils.sheet_to_json(firstSheet);
+                    
+                    // Clear previous preview
+                    previewTable.innerHTML = '';
+                    
+                    // Show preview (max 10 rows)
+                    const previewRows = excelData.slice(0, 10);
+                    previewRows.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${row.Name || ''}</td>
+                            <td>${row.SerialNumber || ''}</td>
+                            <td>${row.AccountTypeName || ''}</td>
+                        `;
+                        previewTable.appendChild(tr);
+                    });
+                    
+                    if (excelData.length > 10) {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `<td colspan="3" class="text-center">... and ${excelData.length - 10} more rows</td>`;
+                        previewTable.appendChild(tr);
+                    }
+                    
+                    // Check for duplicate serial numbers
+                    checkDuplicateSerialNumbers();
+                };
+                reader.readAsArrayBuffer(file);
+            });
+            
+            function checkDuplicateSerialNumbers() {
+                // Reset any previous error displays
+                resultContainer.style.display = 'none';
+                errorList.innerHTML = '';
+                
+                // Create a map to track serial numbers
+                const serialNumberMap = new Map();
+                const duplicateSerialNumbers = [];
+                
+                // Check for duplicates
+                excelData.forEach((row, index) => {
+                    const serialNumber = row.SerialNumber;
+                    if (!serialNumber) return; // Skip empty serial numbers
+                    
+                    if (serialNumberMap.has(serialNumber)) {
+                        // This is a duplicate
+                        if (!duplicateSerialNumbers.includes(serialNumber)) {
+                            duplicateSerialNumbers.push(serialNumber);
+                        }
+                    } else {
+                        serialNumberMap.set(serialNumber, index);
+                    }
+                });
+                
+                // Display warnings if duplicates found
+                if (duplicateSerialNumbers.length > 0) {
+                    resultContainer.style.display = 'block';
+                    totalItems.textContent = excelData.length;
+                    failureCount.textContent = duplicateSerialNumbers.length;
+                    successCount.textContent = '0';
+                    
+                    duplicateSerialNumbers.forEach(serialNumber => {
+                        const li = document.createElement('li');
+                        li.className = 'list-group-item list-group-item-warning';
+                        li.textContent = `Warning: Duplicate SerialNumber '${serialNumber}' found in the upload data`;
+                        errorList.appendChild(li);
+                    });
+                    
+                    // Add a note about fixing duplicates
+                    const noteItem = document.createElement('li');
+                    noteItem.className = 'list-group-item list-group-item-info';
+                    noteItem.textContent = 'Please fix duplicate serial numbers before uploading';
+                    errorList.appendChild(noteItem);
+                }
+                
+                return duplicateSerialNumbers.length === 0;
+            }
+
+            uploadBtn.addEventListener('click', async function() {
+                if (excelData.length === 0) {
+                    alert('Please select a file first');
+                    return;
+                }
+                
+                // Check for duplicates before uploading
+                if (!checkDuplicateSerialNumbers()) {
+                    alert('Please fix the duplicate serial numbers before uploading');
+                    return;
+                }
+
+                try {
+                    // Get the authorization token from localStorage
+                    const token = localStorage.getItem('Abp.AuthToken');
+                    if (!token) {
+                        alert('You are not logged in. Please log in first.');
+                        return;
+                    }
+
+                    // Prepare data for API
+                    const items = excelData.map(row => ({
+                        name: row.Name,
+                        serialNumber: row.SerialNumber,
+                        accountTypeName: row.AccountTypeName
+                    }));
+
+                    // Call the API
+                    const response = await fetch('/api/services/app/COALevel01/BulkUpload', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
+                        },
+                        body: JSON.stringify({ items })
+                    });
+
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        // Display results
+                        totalItems.textContent = result.result.totalItems;
+                        successCount.textContent = result.result.successCount;
+                        failureCount.textContent = result.result.failureCount;
+                        
+                        // Display errors if any
+                        errorList.innerHTML = '';
+                        if (result.result.errors && result.result.errors.length > 0) {
+                            result.result.errors.forEach(error => {
+                                const li = document.createElement('li');
+                                li.className = 'list-group-item list-group-item-danger';
+                                li.textContent = error;
+                                errorList.appendChild(li);
+                            });
+                        }
+                        
+                        resultContainer.style.display = 'block';
+                    } else {
+                        alert('Error: ' + (result.error?.message || 'Unknown error'));
+                    }
+                } catch (error) {
+                    console.error('Error uploading data:', error);
+                    alert('Error uploading data. See console for details.');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

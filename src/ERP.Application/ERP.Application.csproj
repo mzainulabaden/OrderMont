@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <VersionPrefix>1.0.0.0</VersionPrefix>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <AssemblyName>ERP.Application</AssemblyName>
+    <PackageId>ERP.Application</PackageId>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <RootNamespace>ERP</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Modules\Finance\ProfitLossNote\**" />
+    <Compile Remove="Modules\InventoryManagement\PurchaseOrder\Dto - Copy\**" />
+    <EmbeddedResource Remove="Modules\Finance\ProfitLossNote\**" />
+    <EmbeddedResource Remove="Modules\InventoryManagement\PurchaseOrder\Dto - Copy\**" />
+    <None Remove="Modules\Finance\ProfitLossNote\**" />
+    <None Remove="Modules\InventoryManagement\PurchaseOrder\Dto - Copy\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ERP.Core\ERP.Core.csproj" />
+    <ProjectReference Include="..\ERP.EntityFrameworkCore\ERP.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="EPPlus" Version="7.6.0" />
+    <PackageReference Include="Z.EntityFramework.Extensions.EFCore" Version="9.103.7" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="9.103.7" />
+    <PackageReference Include="AutoMapper.Data" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\Finance\ChartOfAccount\COALevel01\" />
+    <Folder Include="Modules\Finance\ChartOfAccount\COALevel04\" />
+    <Folder Include="Modules\Finance\ChartOfAccount\COALevel03\" />
+    <Folder Include="Modules\Finance\ChartOfAccount\COALevel02\" />
+    <Folder Include="Modules\Finance\JournalVoucher\" />
+    <Folder Include="Modules\Finance\ProfitLoseNote\" />
+    <Folder Include="Modules\HumanResource\CompanyProfile\" />
+    <Folder Include="Modules\HumanResource\Todo\" />
+    <Folder Include="Modules\HumanResource\NewFolder\" />
+    <Folder Include="Modules\InventoryManagement\DayBook\" />
+    <Folder Include="Modules\InventoryManagement\DemandBook\" />
+    <Folder Include="Modules\InventoryManagement\PurchaseReturn\" />
+    <Folder Include="Modules\SalesManagement\SalesInvoiceReversal\Dtos\" />
+    <Folder Include="Modules\SalesManagement\SalesReturn\" />
+  </ItemGroup>
+</Project>

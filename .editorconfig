@@ -1,0 +1,19 @@
+﻿[*.cs]
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
+# CS1570: XML comment has badly formed XML
+dotnet_diagnostic.CS1570.severity = none
+
+# IDE0058: Expression value is never used
+dotnet_diagnostic.IDE0058.severity = none
+
+# IDE0320: Make anonymous function static
+csharp_prefer_static_anonymous_function = true
+
+# CS0162: Unreachable code detected
+dotnet_diagnostic.CS0162.severity = none
+
+# CS0618: Type or member is obsolete
+dotnet_diagnostic.CS0618.severity = none
