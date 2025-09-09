@@ -9,7 +9,7 @@ using ERP.Generics.Simple;
 
 namespace ERP.Modules.InventoryManagement.PurchaseInvoice
 {
-    [AutoMap(typeof(IMS_PurchaseInvoiceInfo))]
+    [AutoMap(typeof(PurchaseInvoiceInfo))]
     public class IMS_PurchaseInvoiceGetAllDto : Entity<long>
     {
         public string PONumber { get; set; }

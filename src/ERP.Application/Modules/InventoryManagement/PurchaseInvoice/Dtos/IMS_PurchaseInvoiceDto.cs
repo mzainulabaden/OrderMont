@@ -10,7 +10,7 @@ using ERP.Generics.Simple;
 
 namespace ERP.Modules.InventoryManagement.PurchaseInvoice
 {
-    [AutoMap(typeof(IMS_PurchaseInvoiceInfo))]
+    [AutoMap(typeof(PurchaseInvoiceInfo))]
     public class IMS_PurchaseInvoiceDto : Entity<long>
     {
         public string PONumber { get; set; }
@@ -29,7 +29,7 @@ namespace ERP.Modules.InventoryManagement.PurchaseInvoice
         public List<IMS_PurchaseInvoiceDetailsDto> IMS_PurchaseInvoiceDetails { get; set; }
     }
 
-    [AutoMap(typeof(IMS_PurchaseInvoiceDetailsInfo))]
+    [AutoMap(typeof(PurchaseInvoiceDetailsInfo))]
     public class IMS_PurchaseInvoiceDetailsDto : Entity<long>
     {
         public long ItemId { get; set; }
