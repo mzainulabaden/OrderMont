@@ -15,19 +15,6 @@ public class ERPAuthorizationProvider : AuthorizationProvider
 			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Delete, L("DeleteIMS_PurchaseInvoice"));
 			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_ApproveDocument, L("ApproveIMS_PurchaseInvoice"));
 
-			// IMS_PurchaseInvoice Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice, L("IMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Create, L("CreateIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Edit, L("EditIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Delete, L("DeleteIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_ApproveDocument, L("ApproveIMS_PurchaseInvoice"));
-
-			// IMS_PurchaseInvoice Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice, L("IMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Create, L("CreateIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Edit, L("EditIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Delete, L("DeleteIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_ApproveDocument, L("ApproveIMS_PurchaseInvoice"));
 
 			// IMS_Item Permission
 			context.CreatePermission(PermissionNames.LookUps_IMS_Item, L("IMS_Item"));
