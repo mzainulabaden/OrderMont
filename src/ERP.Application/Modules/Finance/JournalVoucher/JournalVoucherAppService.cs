@@ -5,7 +5,6 @@ using Abp.UI;
 using ERP.Authorization;
 using ERP.Modules.Finance.ChartOfAccount.COALevel04;
 using ERP.Modules.Finance.GeneralLedger;
-using ERP.Modules.HumanResource.EmployeeManagement;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -15,12 +14,10 @@ using Z.EntityFramework.Plus;
 
 namespace ERP.Modules.Finance.JournalVoucher
 {
-    [AbpAuthorize(PermissionNames.LookUps_FINANCE_JournalVoucher)]
     public class JournalVoucherAppService : ERPDocumentService<JournalVoucherInfo>
     {
         public IRepository<JournalVoucherInfo, long> FINANCE_JournalVoucher_Repo { get; set; }
         public IRepository<COALevel04Info, long> COAlvl4_Repo { get; set; }
-        public IRepository<EmployeeInfo, long> Employee_Repo { get; set; }
         public IRepository<GeneralLedgerInfo, long> GeneralLedger_Repo { get; set; }
 
         public async Task<PagedResultDto<FINANCE_JournalVoucherGetAllDto>> GetAll(FINANCE_JournalVoucherFiltersDto filters)
@@ -49,7 +46,6 @@ namespace ERP.Modules.Finance.JournalVoucher
             return new PagedResultDto<FINANCE_JournalVoucherGetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_JournalVoucher_Create)]
         public async Task<string> Create(FINANCE_JournalVoucherDto input)
         {
             var entity = ObjectMapper.Map<JournalVoucherInfo>(input);
@@ -104,7 +100,6 @@ namespace ERP.Modules.Finance.JournalVoucher
 
             return output;
         }
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_JournalVoucher_Edit)]
         [HttpPut]
         public async Task<string> Edit(FINANCE_JournalVoucherDto input)
         {
@@ -133,7 +128,6 @@ namespace ERP.Modules.Finance.JournalVoucher
             return "FINANCE_JournalVoucher Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_JournalVoucher_Delete)]
         public async Task<string> Delete(long Id)
         {
             var f_inance_journal_voucher = await FINANCE_JournalVoucher_Repo.GetAll(this, i => i.Id == Id).FirstOrDefaultAsync();
@@ -147,7 +141,6 @@ namespace ERP.Modules.Finance.JournalVoucher
             return "FINANCE_JournalVoucher Deleted Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_JournalVoucher_ApproveDocument)]
         public async override Task<string> ApproveDocument(long id)
         {
             var voucher = await FINANCE_JournalVoucher_Repo.GetAllIncluding(i => i.JournalVoucherDetails).Where(i => i.Id == id).FirstOrDefaultAsync();

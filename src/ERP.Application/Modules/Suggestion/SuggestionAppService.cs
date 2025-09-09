@@ -10,10 +10,6 @@ using ERP.Modules.Finance.ChartOfAccount.COALevel02;
 using ERP.Modules.Finance.ChartOfAccount.COALevel03;
 using ERP.Modules.Finance.ChartOfAccount.COALevel04;
 using ERP.Modules.Finance.LookUps;
-using ERP.Modules.HumanResource.CommisionPolicy;
-using ERP.Modules.HumanResource.CompanyProfile;
-using ERP.Modules.HumanResource.EmployeeManagement;
-using ERP.Modules.HumanResource.LookUps;
 using ERP.Modules.InventoryManagement.Item;
 using ERP.Modules.InventoryManagement.LookUps;
 using ERP.Modules.Suggestion.Dtos;
@@ -34,18 +30,13 @@ namespace ERP.Modules.Suggestion
         public IRepository<COALevel03Info, long> COALevel03_Repo { get; set; }
         public IRepository<COALevel04Info, long> COALevel04_Repo { get; set; }
         public IRepository<CurrencyInfo, long> Currency_Repo { get; set; }
-        public IRepository<DesignationInfo, long> Designation_Repo { get; set; }
-        public IRepository<EmployeeInfo, long> Employee_Repo { get; set; }
+
         public IRepository<ItemInfo, long> Item_Repo { get; set; }
         public IRepository<ItemCategoryInfo, long> ItemCategory_Repo { get; set; }
         public IRepository<LinkWithInfo, long> LinkWith_Repo { get; set; }
         public IRepository<PaymentModeInfo, long> PaymentMode_Repo { get; set; }
-        public IRepository<UnitInfo, long> Unit_Repo { get; set; }
         public IRepository<User, long> User_Repo { get; set; }
 
-        public IRepository<WarehouseInfo, long> Warehouse_Repo { get; set; }
-        public IRepository<CompanyProfileInfo, long> CompanyProfile_Repo { get; set; }
-        public IRepository<CommissionPolicyInfo, long> CommisionPolicy_Repo { get; set; }
 
         public async Task<PagedResultDto<SuggestionDto>> GetSuggestions(string Target, SuggestionFilterDto filters)
         {
@@ -62,20 +53,15 @@ namespace ERP.Modules.Suggestion
                 case "COALevel03": output = await GetCOALevel03Suggestions(filters); break;
                 case "COALevel04": output = await GetCOALevel04Suggestions(filters); break;
                 case "Currency": output = await GetSuggestions(Currency_Repo, filters); break;
-                case "CommissionPolicy": output = await GetSuggestions(CommisionPolicy_Repo, filters); break;
-                case "Designation": output = await GetSuggestions(Designation_Repo, filters); break;
-                case "Employee": output = await GetEmployeeSuggestions(filters); break;
                 case "Item": output = await GetSuggestions(Item_Repo, filters); break;
                 case "ItemCategory": output = await GetSuggestions(ItemCategory_Repo, filters); break;
-                case "CompanyProfile": output = await CompanyProfileSuggestions( filters); break;
+            
                 case "LinkWith": output = await GetSuggestions(LinkWith_Repo, filters); break;
                 case "PaymentMode": output = await GetSuggestions(PaymentMode_Repo, filters); break;
                 case "Users": output = await GetUserSuggestions(filters); break;
                 case "Supplier": output = await GetCOALevel04Suggestions(filters, i => i.NatureOfAccount == NatureOfAccount.Supplier); break;
                 case "Expense": output = await GetCOALevel04Suggestions(filters, i => i.NatureOfAccount == NatureOfAccount.Expense); break;
                 case "Tax": output = await GetCOALevel04Suggestions(filters, i => i.NatureOfAccount == NatureOfAccount.Tax); break;
-                case "Unit": output = await GetUnitSuggestions(filters); break;
-                case "Warehouse": output = await GetSuggestions(Warehouse_Repo, filters); break;
                 
                 default: throw new ArgumentException($"Invalid Target: {Target}");
             }
@@ -137,32 +123,6 @@ namespace ERP.Modules.Suggestion
             return new PagedResultDto<SuggestionDto>(query.Count(), result);
         }
 
-        private async Task<PagedResultDto<SuggestionDto>> GetEmployeeSuggestions(SuggestionFilterDto filters)
-        {
-            var query = Employee_Repo.GetAll(this, i => i.IsActive);
-
-            if (!string.IsNullOrEmpty(filters.Id))
-                query = query.Where(i => i.Id == filters.Id.TryToLong());
-            if (!string.IsNullOrEmpty(filters.Name))
-                query = query.Where(i => i.Name.Contains(filters.Name));
-            var result = await query.Skip(filters.SkipCount).Take(filters.MaxResultCount).OrderByDescending(i => i.CreationTime).Select(i => new SuggestionDto { Id = i.Id, Name = i.Name, Additional = i.ErpId }).ToListAsync();
-
-            return new PagedResultDto<SuggestionDto>(query.Count(), result);
-        }
-
-        private async Task<PagedResultDto<SuggestionDto>> GetUnitSuggestions(SuggestionFilterDto filters)
-        {
-            var query = Unit_Repo.GetAll(this);
-
-            if (!string.IsNullOrEmpty(filters.Id))
-                query = query.Where(i => i.Id == filters.Id.TryToLong());
-            if (!string.IsNullOrEmpty(filters.Name))
-                query = query.Where(i => i.Name.Contains(filters.Name));
-            var result = await query.Skip(filters.SkipCount).Take(filters.MaxResultCount).OrderByDescending(i => i.CreationTime).Select(i => new SuggestionDto { Id = i.Id, Name = i.Name, Additional = i.ConversionFactor.ToString() }).ToListAsync();
-
-            return new PagedResultDto<SuggestionDto>(query.Count(), result);
-        }
-
         private async Task<PagedResultDto<SuggestionDto>> GetSuggestions<TEntity>(IRepository<TEntity, long> repository, SuggestionFilterDto filters, Expression<Func<TEntity, bool>> custom_expression = null) where TEntity : SimpleEntityBase
         {
             var query = repository.GetAll(this);
@@ -178,22 +138,6 @@ namespace ERP.Modules.Suggestion
             return new PagedResultDto<SuggestionDto>(query.Count(), result);
         }
     
-        private async Task<PagedResultDto<SuggestionDto>> CompanyProfileSuggestions(SuggestionFilterDto filters)
-        {
-            var query = CompanyProfile_Repo.GetAll(this);
-
-            if (!string.IsNullOrWhiteSpace(filters.Id) && long.TryParse(filters.Id, out var parsedId))
-                query = query.Where(i => i.Id == parsedId);
-
-            if (!string.IsNullOrWhiteSpace(filters.Name))
-                query = query.Where(i => i.Name.Contains(filters.Name));
-
-            var totalCount = await query.CountAsync();
-
-            var result = await query.OrderBy(i => i.Name).Skip(filters.SkipCount).Take(filters.MaxResultCount).Select(i => new SuggestionDto{Id = i.Id,Name = i.Name,Additional = i.Logo}).ToListAsync();
-
-            return new PagedResultDto<SuggestionDto>(totalCount, result);
-        }
         private async Task<PagedResultDto<SuggestionDto>> GetUserSuggestions(SuggestionFilterDto filters)
         {
             var query = User_Repo.GetAll();

@@ -16,7 +16,6 @@ using ERP.Modules.Finance.ChartOfAccount.COALevel03;
 
 namespace ERP.Modules.Finance.ChartOfAccount.COALevel01
 {
-    [AbpAuthorize(PermissionNames.LookUps_COALevel01)]
     public class COALevel01AppService : ApplicationService
     {
         public IRepository<COALevel01Info, long> COALevel01_Repo { get; set; }
@@ -52,7 +51,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel01
             return new PagedResultDto<COALevel01GetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel01_Create)]
         public async Task<string> Create(COALevel01Dto input)
         {
             var account_type = AccountType_Repo.GetAll(this, i => i.Id == input.AccountTypeId).DeferredFirstOrDefault().FutureValue();
@@ -68,7 +66,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel01
             return "COALevel01 Created Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel01_Create)]
         public async Task<COADumpHierarchyResultDto> DumpHierarchy(COADumpHierarchyRequestDto input)
         {
             var result = new COADumpHierarchyResultDto();
@@ -219,7 +216,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel01
             return result;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel01_Create)]
         public async Task<COALevel01BulkUploadResultDto> BulkUpload(COALevel01BulkUploadRequestDto input)
         {
             var result = new COALevel01BulkUploadResultDto
@@ -322,7 +318,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel01
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel01_Update)]
         public async Task<string> Update(COALevel01Dto input)
         {
             var account_type = AccountType_Repo.GetAll(this, i => i.Id == input.AccountTypeId).DeferredFirstOrDefault().FutureValue();
@@ -338,7 +333,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel01
             return "COALevel01 Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel01_Delete)]
         public async Task<string> Delete(long Id)
         {
             var coa_level01 = await GetById(Id);

@@ -13,11 +13,9 @@ using System.Text.Json.Serialization;
 
 namespace ERP.Modules.Finance.ProfitLoseNote
 {
-    [AbpAuthorize(PermissionNames.LookUps_FINANCE_ProfitLoseNote)]
     public class ProfitLoseNoteAppService : GenericSimpleAppService<FINANCE_ProfitLoseNoteDto, ProfitLoseNoteInfo, SimpleSearchDtoBase>
     {
         
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_ProfitLoseNote)]
         public override PagedResultDto<FINANCE_ProfitLoseNoteDto> GetAll(SimpleSearchDtoBase search)
         {
             var query = MainRepository.GetAllIncluding(i => i.ProfitLoseNoteDetails).Where(i => i.TenantId == AbpSession.TenantId);
@@ -34,7 +32,6 @@ namespace ERP.Modules.Finance.ProfitLoseNote
             return new PagedResultDto<FINANCE_ProfitLoseNoteDto>(query.Count(), items);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_ProfitLoseNote)]
         public override FINANCE_ProfitLoseNoteDto Get(long Id)
         {
             var entity = MainRepository
@@ -48,7 +45,6 @@ namespace ERP.Modules.Finance.ProfitLoseNote
             return dto;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_ProfitLoseNote_Create)]
         public override async Task<FINANCE_ProfitLoseNoteDto> Create(FINANCE_ProfitLoseNoteDto input)
         {
             var entity = ObjectMapper.Map<ProfitLoseNoteInfo>(input);
@@ -61,7 +57,6 @@ namespace ERP.Modules.Finance.ProfitLoseNote
             return ObjectMapper.Map<FINANCE_ProfitLoseNoteDto>(created);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_ProfitLoseNote_Edit)]
         public override async Task<FINANCE_ProfitLoseNoteDto> Update(FINANCE_ProfitLoseNoteDto input)
         {
             var entity = await MainRepository.GetAsync(input.Id);
@@ -75,7 +70,6 @@ namespace ERP.Modules.Finance.ProfitLoseNote
             return ObjectMapper.Map<FINANCE_ProfitLoseNoteDto>(updated);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_ProfitLoseNote_Delete)]
         public override async Task<string> Delete(EntityDto<long> input)
         {
             return await base.Delete(input);

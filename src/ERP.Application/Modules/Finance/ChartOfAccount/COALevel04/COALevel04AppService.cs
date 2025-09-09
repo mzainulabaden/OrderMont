@@ -16,7 +16,6 @@ using System;
 
 namespace ERP.Modules.Finance.ChartOfAccount.COALevel04
 {
-    [AbpAuthorize(PermissionNames.LookUps_COALevel04)]
     public class COALevel04AppService : ApplicationService
     {
         public IRepository<COALevel04Info, long> COALevel04_Repo { get; set; }
@@ -78,7 +77,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel04
             return new PagedResultDto<COALevel04GetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel04_Create)]
         public async Task<string> Create(COALevel04Dto input)
         {
             var entity = ObjectMapper.Map<COALevel04Info>(input);
@@ -140,7 +138,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel04
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel04_Update)]
         public async Task<string> Update(COALevel04Dto input)
         {
             var old_coa_level_04 = await GetById(input.Id);
@@ -186,7 +183,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel04
             return "COALevel04 Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel04_Delete)]
         public async Task<string> Delete(long Id)
         {
             var coa_level04 = await GetById(Id);
@@ -204,7 +200,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel04
             return count.ToString().PadLeft(4, '0');
         }
         
-        [AbpAuthorize(PermissionNames.LookUps_COALevel04_Create)]
         public async Task<COALevel04BulkUploadResultDto> BulkUpload(COALevel04BulkUploadRequestDto input)
         {
             var result = new COALevel04BulkUploadResultDto

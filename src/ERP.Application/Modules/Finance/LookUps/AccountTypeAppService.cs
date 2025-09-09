@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace ERP.Modules.Finance.LookUps
 {
-    [AbpAuthorize(PermissionNames.LookUps_AccountType)]
     public class AccountTypeAppService : GenericSimpleAppService<AccountTypeDto, AccountTypeInfo, SimpleSearchDtoBase>
     {
         public IRepository<COALevel01Info, long> COALevel01_Repo { get; set; }

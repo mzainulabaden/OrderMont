@@ -4,6 +4,7 @@ using ERP.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERP.Migrations
 {
     [DbContext(typeof(ERPDbContext))]
-    partial class ERPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250908113326_add_table_ItemInfo")]
+    partial class add_table_ItemInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1787,130 +1790,6 @@ namespace ERP.Migrations
                     b.ToTable("IMS_LocationInfo");
                 });
 
-            modelBuilder.Entity("ERP.Modules.InventoryManagement.PurchaseInvoice.PurchaseInvoiceDetailsInfo", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("ExFactoryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("ItemId")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("OnShipment")
-                        .HasPrecision(16, 2)
-                        .HasColumnType("decimal(16,2)");
-
-                    b.Property<decimal>("OrderQty")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<long>("PurchaseInvoiceInfoId")
-                        .HasColumnType("bigint");
-
-                    b.Property<decimal>("Rate")
-                        .HasPrecision(16, 2)
-                        .HasColumnType("decimal(16,2)");
-
-                    b.Property<decimal>("RecievedQty")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("PurchaseInvoiceInfoId");
-
-                    b.ToTable("IMS_PurchaseInvoiceDetailsInfo");
-                });
-
-            modelBuilder.Entity("ERP.Modules.InventoryManagement.PurchaseInvoice.PurchaseInvoiceInfo", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<decimal>("BilledTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatorUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("DeleterUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("DepositAppliedTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("DepositTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("ExFactoryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ExternalRefNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("IssueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastModifierUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Memo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PONumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("PlacedOrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Remarks")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("StatusId")
-                        .HasColumnType("bigint");
-
-                    b.Property<int?>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("UnBilledTotal")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<long>("VendorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("VoucherNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VendorId");
-
-                    b.ToTable("IMS_PurchaseInvoiceInfo");
-                });
-
             modelBuilder.Entity("ERP.Modules.InventoryManagement.Vendor.VendorInfo", b =>
                 {
                     b.Property<long>("Id")
@@ -2248,15 +2127,6 @@ namespace ERP.Migrations
                     b.Navigation("LastModifierUser");
                 });
 
-            modelBuilder.Entity("ERP.Modules.InventoryManagement.PurchaseInvoice.PurchaseInvoiceDetailsInfo", b =>
-                {
-                    b.HasOne("ERP.Modules.InventoryManagement.PurchaseInvoice.PurchaseInvoiceInfo", null)
-                        .WithMany("PurchaseInvoiceDetails")
-                        .HasForeignKey("PurchaseInvoiceInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ERP.MultiTenancy.Tenant", b =>
                 {
                     b.HasOne("ERP.Authorization.Users.User", "CreatorUser")
@@ -2353,11 +2223,6 @@ namespace ERP.Migrations
                     b.Navigation("Settings");
 
                     b.Navigation("Tokens");
-                });
-
-            modelBuilder.Entity("ERP.Modules.InventoryManagement.PurchaseInvoice.PurchaseInvoiceInfo", b =>
-                {
-                    b.Navigation("PurchaseInvoiceDetails");
                 });
 #pragma warning restore 612, 618
         }

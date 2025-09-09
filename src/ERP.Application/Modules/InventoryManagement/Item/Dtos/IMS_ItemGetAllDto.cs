@@ -1,32 +1,30 @@
-﻿using Abp.Domain.Entities;
-using Abp.Webhooks;
+using System;
+using Abp.AutoMapper;
+using Abp.Authorization;
+using ERP.Authorization;
 using ERP.Generics;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities;
+using Abp.Application.Services.Dto;
+using ERP.Generics.Simple;
 
 namespace ERP.Modules.InventoryManagement.Item
 {
-    [Index(
-        nameof(CategoryId),
-        nameof(VendorId)
-        )]
-    public class ItemInfo : SimpleEntityBase
+    [AutoMap(typeof(ItemInfo))]
+    public class IMS_ItemGetAllDto : Entity<long>
     {
-
         public string SKU { get; set; }
         public string Status { get; set; }
         public long StatusId { get; set; }
+        public string StatusName { get; set; }
         public long CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public long VendorId { get; set; }
+        public string VendorName { get; set; }
         public decimal QtyPerCase { get; set; }
-        [Precision(16, 2)]
         public decimal LandedCost { get; set; }
-        [Precision(16, 2)]
         public decimal ListPrice { get; set; }
         public decimal HSCode { get; set; }
         public string ManufacturingLeadTime { get; set; }
-        [Precision(16, 2)]
         public decimal LastPurchaseCost { get; set; }
         public decimal GTIN { get; set; }
         public decimal CartonLengthInches { get; set; }
@@ -39,9 +37,8 @@ namespace ERP.Modules.InventoryManagement.Item
         public decimal UnitWeightLB { get; set; }
         public decimal UnitHeightInches { get; set; }
         public decimal ASIN { get; set; }
-        [Precision(16,2)]
         public decimal Rate { get; set; }
         public string ManufacturingTime { get; set; }
+        public string Name { get; set; }
     }
-    
 }

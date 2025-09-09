@@ -1,6 +1,5 @@
 ﻿using Abp.Domain.Entities;
 using ERP.Enums;
-using ERP.Modules.HumanResource.CommisionPolicy;
 using System;
 using System.Collections.Generic;
 

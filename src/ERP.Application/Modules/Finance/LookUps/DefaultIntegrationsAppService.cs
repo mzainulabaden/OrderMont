@@ -13,7 +13,6 @@ using Z.EntityFramework.Plus;
 
 namespace ERP.Modules.Finance.LookUps
 {
-    [AbpAuthorize(PermissionNames.LookUps_FINANCE_DefaultIntegrations)]
     public class DefaultIntegrationsAppService : ApplicationService
     {
         public IRepository<DefaultIntegrationsInfo, long> FINANCE_DefaultIntegrations_Repo { get; set; }
@@ -49,7 +48,6 @@ namespace ERP.Modules.Finance.LookUps
             return new PagedResultDto<FINANCE_DefaultIntegrationsGetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_DefaultIntegrations_Create)]
         public async Task<string> Create(FINANCE_DefaultIntegrationsDto input)
         {
             var chart_of_account = ChartOfAccount_Repo.GetAll(this, i => i.Id == input.ChartOfAccountId).DeferredFirstOrDefault().FutureValue();
@@ -85,7 +83,6 @@ namespace ERP.Modules.Finance.LookUps
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_DefaultIntegrations_Edit)]
    
         public async Task<string> Update(FINANCE_DefaultIntegrationsDto input)
         {
@@ -102,7 +99,6 @@ namespace ERP.Modules.Finance.LookUps
             return "FINANCE_DefaultIntegrations Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_DefaultIntegrations_Delete)]
         public async Task<string> Delete(long Id)
         {
             var f_inance_default_integrations = await FINANCE_DefaultIntegrations_Repo.GetAll(this, i => i.Id == Id).FirstOrDefaultAsync();

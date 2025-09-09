@@ -15,7 +15,6 @@ using Z.EntityFramework.Plus;
 
 namespace ERP.Modules.Finance.ChartOfAccount.COALevel02
 {
-    [AbpAuthorize(PermissionNames.LookUps_COALevel02)]
     public class COALevel02AppService : ApplicationService
     {
         public IRepository<COALevel01Info, long> COALevel01_Repo { get; set; }
@@ -59,7 +58,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel02
             return new PagedResultDto<COALevel02GetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel02_Create)]
         public async Task<string> Create(COALevel02Dto input)
         {
             var coa_level01 = COALevel01_Repo.GetAll(this, i => i.Id == input.COALevel01Id).DeferredFirstOrDefault().FutureValue();
@@ -101,7 +99,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel02
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel02_Update)]
         public async Task<string> Update(COALevel02Dto input)
         {
             var coa_level01 = COALevel01_Repo.GetAll(this, i => i.Id == input.COALevel01Id).DeferredFirstOrDefault().FutureValue();
@@ -120,7 +117,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel02
             return "COALevel02 Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel02_Delete)]
         public async Task<string> Delete(long Id)
         {
             var coa_level02 = await GetById(Id);
@@ -144,7 +140,6 @@ namespace ERP.Modules.Finance.ChartOfAccount.COALevel02
             return count.ToString().PadLeft(2, '0');
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_COALevel02_Create)]
         public async Task<COALevel02BulkUploadResultDto> BulkUpload(COALevel02BulkUploadRequestDto input)
         {
             var result = new COALevel02BulkUploadResultDto

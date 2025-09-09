@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace ERP.Modules.Finance.AccountGroups
 {
-    [AbpAuthorize(PermissionNames.LookUps_FINANCE_AccountGroups)]
     public class AccountGroupsAppService : ApplicationService
     {
         public IRepository<AccountGroupsInfo, long> AccountGroups_Repo { get; set; }
@@ -43,7 +42,6 @@ namespace ERP.Modules.Finance.AccountGroups
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_AccountGroups_Create)]
         public async Task<string> Create(AccountGroupsDto input)
         {
             if (input.AccountTypeIds == null || !input.AccountTypeIds.Any())
@@ -93,7 +91,6 @@ namespace ERP.Modules.Finance.AccountGroups
             };
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_AccountGroups_Edit)]
         public async Task<string> Edit(AccountGroupsDto input)
         {
             var valid_account_type_count = await AccountType_Repo.GetAll().Where(at => input.AccountTypeIds.Contains(at.Id)).Select(at => at.Id).CountAsync();
@@ -107,7 +104,6 @@ namespace ERP.Modules.Finance.AccountGroups
             return "Account Group Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_AccountGroups_Delete)]
         public async Task<string> Delete(long Id)
         {
             var entity = await Get(Id);

@@ -13,11 +13,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Modules\Finance\ProfitLossNote\**" />
-    <Compile Remove="Modules\InventoryManagement\PurchaseOrder\Dto - Copy\**" />
     <EmbeddedResource Remove="Modules\Finance\ProfitLossNote\**" />
-    <EmbeddedResource Remove="Modules\InventoryManagement\PurchaseOrder\Dto - Copy\**" />
     <None Remove="Modules\Finance\ProfitLossNote\**" />
-    <None Remove="Modules\InventoryManagement\PurchaseOrder\Dto - Copy\**" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ERP.Core\ERP.Core.csproj" />
@@ -37,13 +34,9 @@
     <Folder Include="Modules\Finance\ChartOfAccount\COALevel02\" />
     <Folder Include="Modules\Finance\JournalVoucher\" />
     <Folder Include="Modules\Finance\ProfitLoseNote\" />
-    <Folder Include="Modules\HumanResource\CompanyProfile\" />
-    <Folder Include="Modules\HumanResource\Todo\" />
-    <Folder Include="Modules\HumanResource\NewFolder\" />
-    <Folder Include="Modules\InventoryManagement\DayBook\" />
-    <Folder Include="Modules\InventoryManagement\DemandBook\" />
-    <Folder Include="Modules\InventoryManagement\PurchaseReturn\" />
-    <Folder Include="Modules\SalesManagement\SalesInvoiceReversal\Dtos\" />
-    <Folder Include="Modules\SalesManagement\SalesReturn\" />
+    <Folder Include="Modules\InventoryManagement\LookUps\" />
+    <Folder Include="Modules\InventoryManagement\Item\" />
+    <Folder Include="Modules\InventoryManagement\PurchaseInvoice\" />
+    <Folder Include="Modules\InventoryManagement\Vendor\" />
   </ItemGroup>
 </Project>

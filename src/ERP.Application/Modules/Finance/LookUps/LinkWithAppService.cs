@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace ERP.Modules.Finance.LookUps
 {
-    [AbpAuthorize(PermissionNames.LookUps_LinkWith)]
     public class LinkWithAppService : GenericSimpleAppService<LinkWithDto, LinkWithInfo, SimpleSearchDtoBase>
     {
         public IRepository<COALevel04Info, long> COALevel04_Repo { get; set; }

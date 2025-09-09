@@ -4,6 +4,7 @@ using ERP.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERP.Migrations
 {
     [DbContext(typeof(ERPDbContext))]
-    partial class ERPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250908123148_add_table_purchaseinvoice1")]
+    partial class add_table_purchaseinvoice1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1809,6 +1812,9 @@ namespace ERP.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("PurchaseInvoiceInfoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PurchaseOrderDetailId")
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("Rate")

@@ -19,7 +19,6 @@ using Z.EntityFramework.Plus;
 
 namespace ERP.Modules.Finance.GeneralNote
 {
-    [AbpAuthorize(PermissionNames.LookUps_FINANCE_GeneralNote)]
     public class GeneralNoteAppService : ERPDocumentService<GeneralNoteInfo>
     {
         public IRepository<GeneralNoteInfo, long> FINANCE_GeneralNote_Repo { get; set; }
@@ -48,7 +47,6 @@ namespace ERP.Modules.Finance.GeneralNote
             return new PagedResultDto<FINANCE_GeneralNoteGetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_GeneralNote_Create)]
         public async Task<string> Create(FINANCE_GeneralNoteDto input)
         {
             var entity = ObjectMapper.Map<GeneralNoteInfo>(input);
@@ -137,7 +135,6 @@ namespace ERP.Modules.Finance.GeneralNote
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_GeneralNote_Edit)]
         public async Task<string>Update(FINANCE_GeneralNoteDto input)
         {
             var old_finance_generalnote = await Get(input.Id);
@@ -182,7 +179,6 @@ namespace ERP.Modules.Finance.GeneralNote
             return "FINANCE_GeneralNote Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_GeneralNote_Delete)]
         public async Task<string> Delete(long Id)
         {
             var f_inance_general_note = await FINANCE_GeneralNote_Repo.GetAll(this, i => i.Id == Id).FirstOrDefaultAsync();
@@ -196,7 +192,6 @@ namespace ERP.Modules.Finance.GeneralNote
             return "FINANCE_GeneralNote Deleted Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_FINANCE_GeneralNote)]
         public async Task<List<COALvl3ByAccountClassDto>> GetCOALvl3ByAccountClass(string accountClass)
         {
 
