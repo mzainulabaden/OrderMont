@@ -54,7 +54,7 @@ namespace ERP.Modules.Suggestion
                 case "COALevel04": output = await GetCOALevel04Suggestions(filters); break;
                 case "Currency": output = await GetSuggestions(Currency_Repo, filters); break;
                 case "Item": output = await GetSuggestions(Item_Repo, filters); break;
-                case "ItemCategory": output = await GetSuggestions(ItemCategory_Repo, filters); break;
+                case "Category": output = await GetSuggestions(ItemCategory_Repo, filters); break;
             
                 case "LinkWith": output = await GetSuggestions(LinkWith_Repo, filters); break;
                 case "PaymentMode": output = await GetSuggestions(PaymentMode_Repo, filters); break;

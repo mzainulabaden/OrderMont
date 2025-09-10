@@ -2,40 +2,39 @@ namespace ERP.Authorization;
 
 public static class PermissionNames
 {
-		// IMS_PurchaseInvoice API Permission
-		public const string LookUps_IMS_PurchaseInvoice = "LookUps.IMS_PurchaseInvoice";
-		public const string LookUps_IMS_PurchaseInvoice_Create = "LookUps.IMS_PurchaseInvoice.Create";
-		public const string LookUps_IMS_PurchaseInvoice_Edit = "LookUps.IMS_PurchaseInvoice.Edit";
-		public const string LookUps_IMS_PurchaseInvoice_Delete = "LookUps.IMS_PurchaseInvoice.Delete";
-		public const string LookUps_IMS_PurchaseInvoice_ApproveDocument = "LookUps.IMS_PurchaseInvoice.ApproveDocument";
+		// PurchaseInvoice API Permission
+		public const string LookUps_PurchaseInvoice = "LookUps.PurchaseInvoice";
+		public const string LookUps_PurchaseInvoice_Create = "LookUps.PurchaseInvoice.Create";
+		public const string LookUps_PurchaseInvoice_Edit = "LookUps.PurchaseInvoice.Edit";
+		public const string LookUps_PurchaseInvoice_Delete = "LookUps.PurchaseInvoice.Delete";
+		public const string LookUps_PurchaseInvoice_ApproveDocument = "LookUps.PurchaseInvoice.ApproveDocument";
 
-		// IMS_Item API Permission
-		public const string LookUps_IMS_Item = "LookUps.IMS_Item";
-		public const string LookUps_IMS_Item_Create = "LookUps.IMS_Item.Create";
-		public const string LookUps_IMS_Item_Edit = "LookUps.IMS_Item.Edit";
-		public const string LookUps_IMS_Item_Delete = "LookUps.IMS_Item.Delete";
+		// Item API Permission
+		public const string LookUps_Item = "LookUps.Item";
+		public const string LookUps_Item_Create = "LookUps.Item.Create";
+		public const string LookUps_Item_Edit = "LookUps.Item.Edit";
+		public const string LookUps_Item_Delete = "LookUps.Item.Delete";
 
-		// IMS_Vendor API Permission
-		public const string LookUps_IMS_Vendor = "LookUps.IMS_Vendor";
-		public const string LookUps_IMS_Vendor_Create = "LookUps.IMS_Vendor.Create";
-		public const string LookUps_IMS_Vendor_Edit = "LookUps.IMS_Vendor.Edit";
-		public const string LookUps_IMS_Vendor_Delete = "LookUps.IMS_Vendor.Delete";
+		// Vendor API Permission
+		public const string LookUps_Vendor = "LookUps.Vendor";
+		public const string LookUps_Vendor_Create = "LookUps.Vendor.Create";
+		public const string LookUps_Vendor_Edit = "LookUps.Vendor.Edit";
+		public const string LookUps_Vendor_Delete = "LookUps.Vendor.Delete";
 
-		// IMS_Location API Permission
-		public const string LookUps_IMS_Location = "LookUps.IMS_Location";
-		public const string LookUps_IMS_Location_Create = "LookUps.IMS_Location.Create";
-		public const string LookUps_IMS_Location_Edit = "LookUps.IMS_Location.Edit";
-		public const string LookUps_IMS_Location_Delete = "LookUps.IMS_Location.Delete";
+		// Location API Permission
+		public const string LookUps_Location = "LookUps.Location";
+		public const string LookUps_Location_Create = "LookUps.Location.Create";
+		public const string LookUps_Location_Edit = "LookUps.Location.Edit";
+		public const string LookUps_Location_Delete = "LookUps.Location.Delete";
 
-		// IMS_ItemCategory API Permission
-		public const string LookUps_IMS_ItemCategory = "LookUps.IMS_ItemCategory";
-		public const string LookUps_IMS_ItemCategory_Create = "LookUps.IMS_ItemCategory.Create";
-		public const string LookUps_IMS_ItemCategory_Edit = "LookUps.IMS_ItemCategory.Edit";
-		public const string LookUps_IMS_ItemCategory_Delete = "LookUps.IMS_ItemCategory.Delete";
+		// ItemCategory API Permission
+		public const string LookUps_ItemCategory = "LookUps.ItemCategory";
+		public const string LookUps_ItemCategory_Create = "LookUps.ItemCategory.Create";
+		public const string LookUps_ItemCategory_Edit = "LookUps.ItemCategory.Edit";
+		public const string LookUps_ItemCategory_Delete = "LookUps.ItemCategory.Delete";
 
-		
 
-    // Universal Permissions
+    // Universal Permissions	
     public const string UNIVERSAL_Dashboard = "Universal.Dashboard";
     public const string UNIVERSAL_Products = "Universal.Products";
     public const string UNIVERSAL_GeneralSetups = "Universal.GeneralSetups";

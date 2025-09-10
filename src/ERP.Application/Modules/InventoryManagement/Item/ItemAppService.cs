@@ -15,7 +15,7 @@ using Z.EntityFramework.Plus;
 
 namespace ERP.Modules.InventoryManagement.Item
 {
-    [AbpAuthorize(PermissionNames.LookUps_IMS_Item)]
+    [AbpAuthorize(PermissionNames.LookUps_Item)]
     public class ItemAppService : ApplicationService
     {
         public IRepository<ItemInfo, long> IMS_Item_Repo { get; set; }
@@ -62,7 +62,7 @@ namespace ERP.Modules.InventoryManagement.Item
             return new PagedResultDto<IMS_ItemGetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_IMS_Item_Create)]
+        [AbpAuthorize(PermissionNames.LookUps_Item_Create)]
         public async Task<string> Create(IMS_ItemDto input)
         {
             var category = Category_Repo.GetAll(this, i => i.Id == input.CategoryId).DeferredFirstOrDefault().FutureValue();
@@ -107,7 +107,7 @@ namespace ERP.Modules.InventoryManagement.Item
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_IMS_Item_Edit)]
+        [AbpAuthorize(PermissionNames.LookUps_Item_Edit)]
         public async Task<string> Edit(IMS_ItemDto input)
         {
             var category = Category_Repo.GetAll(this, i => i.Id == input.CategoryId).DeferredFirstOrDefault().FutureValue();
@@ -121,15 +121,15 @@ namespace ERP.Modules.InventoryManagement.Item
             if (vendor.Value == null)
                 throw new UserFriendlyException($"VendorId: '{input.VendorId}' is invalid.");
 
-            var old_imsitem = await Get(input.Id);  
-            var entity = ObjectMapper.Map(input, old_imsitem);
+            var olditem = await Get(input.Id);  
+            var entity = ObjectMapper.Map(input, olditem);
             entity.Status = GetStatusName(input.StatusId);
             await IMS_Item_Repo.UpdateAsync(entity);
             await CurrentUnitOfWork.SaveChangesAsync();
             return "IMS_Item Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_IMS_Item_Delete)]
+        [AbpAuthorize(PermissionNames.LookUps_Item_Delete)]
         public async Task<string> Delete(long Id)
         {
             var i_ms_item = await IMS_Item_Repo.GetAll(this, i => i.Id == Id).FirstOrDefaultAsync();

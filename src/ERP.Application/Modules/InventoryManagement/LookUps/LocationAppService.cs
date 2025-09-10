@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ERP.Modules.InventoryManagement.LookUps
 {
-    [AbpAuthorize(PermissionNames.LookUps_IMS_Location)]
+    [AbpAuthorize(PermissionNames.LookUps_Location)]
     public class LocationAppService : GenericSimpleAppService<IMS_LocationDto, LocationInfo, SimpleSearchDtoBase>
     {
         public async Task<IMS_LocationBulkUploadResultDto> BulkUpload(IMS_LocationBulkUploadRequestDto input)

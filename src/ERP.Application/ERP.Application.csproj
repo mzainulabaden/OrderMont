@@ -33,7 +33,6 @@
     <Folder Include="Modules\Finance\ChartOfAccount\COALevel03\" />
     <Folder Include="Modules\Finance\ChartOfAccount\COALevel02\" />
     <Folder Include="Modules\Finance\JournalVoucher\" />
-    <Folder Include="Modules\Finance\ProfitLoseNote\" />
     <Folder Include="Modules\InventoryManagement\LookUps\" />
     <Folder Include="Modules\InventoryManagement\Item\" />
     <Folder Include="Modules\InventoryManagement\PurchaseInvoice\" />

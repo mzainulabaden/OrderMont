@@ -14,7 +14,7 @@ using Z.EntityFramework.Plus;
 
 namespace ERP.Modules.InventoryManagement.PurchaseInvoice
 {
-    [AbpAuthorize(PermissionNames.LookUps_IMS_PurchaseInvoice)]
+    [AbpAuthorize(PermissionNames.LookUps_PurchaseInvoice)]
     public class PurchaseInvoiceAppService : ERPDocumentService<PurchaseInvoiceInfo>
     {
         public IRepository<PurchaseInvoiceInfo, long> IMS_PurchaseInvoice_Repo { get; set; }
@@ -58,7 +58,7 @@ namespace ERP.Modules.InventoryManagement.PurchaseInvoice
             return new PagedResultDto<IMS_PurchaseInvoiceGetAllDto>(total_count.Value, output);
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_IMS_PurchaseInvoice_Create)]
+        [AbpAuthorize(PermissionNames.LookUps_PurchaseInvoice_Create)]
         public async Task<string> Create(IMS_PurchaseInvoiceDto input)
         {
             var vendor = Vendor_Repo.GetAll(this, i => i.Id == input.VendorId).DeferredFirstOrDefault().FutureValue();
@@ -132,12 +132,12 @@ namespace ERP.Modules.InventoryManagement.PurchaseInvoice
             return output;
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_IMS_PurchaseInvoice_Edit)]
+        [AbpAuthorize(PermissionNames.LookUps_PurchaseInvoice_Edit)]
         public async Task<string> Edit(IMS_PurchaseInvoiceDto input)
         {
-            var old_ims_purchaseinvoice = await Get(input.Id);
-            if (old_ims_purchaseinvoice.Status != "PENDING")
-                throw new UserFriendlyException($"Only entries with a status of 'PENDING' can be edited. The current status is '" + old_ims_purchaseinvoice.Status + "'.");
+            var old_purchaseinvoice = await Get(input.Id);
+            if (old_purchaseinvoice.Status != "PENDING")
+                throw new UserFriendlyException($"Only entries with a status of 'PENDING' can be edited. The current status is '" + old_purchaseinvoice.Status + "'.");
 
             var vendor = Vendor_Repo.GetAll(this, i => i.Id == input.VendorId).DeferredFirstOrDefault().FutureValue();
             await vendor.ValueAsync();
@@ -147,7 +147,7 @@ namespace ERP.Modules.InventoryManagement.PurchaseInvoice
             if (!System.Enum.IsDefined(typeof(Status), (int)input.StatusId))
                 throw new UserFriendlyException($"StatusId: '{input.StatusId}' is invalid.");
 
-            var entity = ObjectMapper.Map(input, old_ims_purchaseinvoice);
+            var entity = ObjectMapper.Map(input, old_purchaseinvoice);
             entity.VoucherNumber = await GetVoucherNumber("UA", input.IssueDate, entity.VoucherNumber.GetVoucherIndex());
 
             var item_ids = input.IMS_PurchaseInvoiceDetails.Select(i => i.ItemId).ToList();
@@ -170,7 +170,7 @@ namespace ERP.Modules.InventoryManagement.PurchaseInvoice
             return "IMS_PurchaseInvoice Updated Successfully.";
         }
 
-        [AbpAuthorize(PermissionNames.LookUps_IMS_PurchaseInvoice_Delete)]
+        [AbpAuthorize(PermissionNames.LookUps_PurchaseInvoice_Delete)]
         public async Task<string> Delete(long Id)
         {
             var i_ms_purchase_invoice = await IMS_PurchaseInvoice_Repo.GetAll(this, i => i.Id == Id).FirstOrDefaultAsync();

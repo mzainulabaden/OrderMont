@@ -1586,6 +1586,367 @@ namespace ERP.Migrations
                     b.ToTable("AbpUsers");
                 });
 
+            modelBuilder.Entity("ERP.Modules.Finance.ChartOfAccount.COALevel01.COALevel01Info", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountTypeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SerialNumber", "AccountTypeId");
+
+                    b.ToTable("FINANCE_COALevel01Info");
+                });
+
+            modelBuilder.Entity("ERP.Modules.Finance.ChartOfAccount.COALevel02.COALevel02Info", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountTypeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("COALevel01Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SerialNumber", "COALevel01Id", "AccountTypeId");
+
+                    b.ToTable("FINANCE_COALevel02Info");
+                });
+
+            modelBuilder.Entity("ERP.Modules.Finance.ChartOfAccount.COALevel03.COALevel03Info", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountTypeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("COALevel02Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SerialNumber", "COALevel02Id", "AccountTypeId");
+
+                    b.ToTable("FINANCE_COALevel03Info");
+                });
+
+            modelBuilder.Entity("ERP.Modules.Finance.ChartOfAccount.COALevel04.COALevel04Info", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("AccountTypeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("CNIC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("COALevel03Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ContactNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CurrencyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("LinkWithId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NationalTaxNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NatureOfAccount")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("OpeningBalance")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PhysicalAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SalesTaxNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("StopEntryBefore")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SerialNumber", "COALevel03Id", "AccountTypeId", "CurrencyId", "LinkWithId");
+
+                    b.ToTable("FINANCE_COALevel04Info");
+                });
+
+            modelBuilder.Entity("ERP.Modules.Finance.GeneralLedger.GeneralLedgerInfo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ChartOfAccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal?>("Credit")
+                        .HasPrecision(16, 2)
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<decimal?>("Debit")
+                        .HasPrecision(15, 2)
+                        .HasColumnType("decimal(15,2)");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("EmployeeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsAdjustmentEntry")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("IssueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("LinkedDocument")
+                        .HasColumnType("int");
+
+                    b.Property<long>("LinkedDocumentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("ReferenceDocument")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ReferenceDocumentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ReferenceVoucherNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VoucherNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FINANCE_GeneralLedgerInfo");
+                });
+
+            modelBuilder.Entity("ERP.Modules.Finance.LookUps.AccountTypeInfo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int?>("AccountGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FINANCE_AccountTypeInfo");
+                });
+
             modelBuilder.Entity("ERP.Modules.InventoryManagement.Item.ItemInfo", b =>
                 {
                     b.Property<long>("Id")
@@ -1701,7 +2062,7 @@ namespace ERP.Migrations
 
                     b.HasIndex("CategoryId", "VendorId");
 
-                    b.ToTable("IMS_ItemInfo");
+                    b.ToTable("ItemInfo");
                 });
 
             modelBuilder.Entity("ERP.Modules.InventoryManagement.LookUps.ItemCategoryInfo", b =>
@@ -1741,7 +2102,7 @@ namespace ERP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IMS_ItemCategoryInfo");
+                    b.ToTable("ItemCategoryInfo");
                 });
 
             modelBuilder.Entity("ERP.Modules.InventoryManagement.LookUps.LocationInfo", b =>
@@ -1784,7 +2145,7 @@ namespace ERP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IMS_LocationInfo");
+                    b.ToTable("LocationInfo");
                 });
 
             modelBuilder.Entity("ERP.Modules.InventoryManagement.PurchaseInvoice.PurchaseInvoiceDetailsInfo", b =>
@@ -1817,6 +2178,9 @@ namespace ERP.Migrations
 
                     b.Property<decimal>("RecievedQty")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("VoucherNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1908,7 +2272,90 @@ namespace ERP.Migrations
 
                     b.HasIndex("VendorId");
 
-                    b.ToTable("IMS_PurchaseInvoiceInfo");
+                    b.ToTable("PurchaseInvoiceInfo");
+                });
+
+            modelBuilder.Entity("ERP.Modules.InventoryManagement.StockLedger.WarehouseStockLedgerInfo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("ActualQty")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<long?>("COALevel04Id")
+                        .HasPrecision(16, 2)
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Credit")
+                        .HasPrecision(16, 2)
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<decimal>("Debit")
+                        .HasPrecision(16, 2)
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("DocumentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("IssueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ItemId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Rate")
+                        .HasPrecision(16, 2)
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasPrecision(16, 2)
+                        .HasColumnType("decimal(16,2)");
+
+                    b.Property<string>("VoucherNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("WarehouseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("WarehouseStockLedgerLinkedDocument")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("WarehouseStockLedgerInfo");
                 });
 
             modelBuilder.Entity("ERP.Modules.InventoryManagement.Vendor.VendorInfo", b =>
@@ -1963,7 +2410,7 @@ namespace ERP.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("IMS_VendorInfo");
+                    b.ToTable("VendorInfo");
                 });
 
             modelBuilder.Entity("ERP.MultiTenancy.Tenant", b =>

@@ -8,39 +8,37 @@ public class ERPAuthorizationProvider : AuthorizationProvider
 {
     public override void SetPermissions(IPermissionDefinitionContext context)
     {
-			// IMS_PurchaseInvoice Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice, L("IMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Create, L("CreateIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Edit, L("EditIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_Delete, L("DeleteIMS_PurchaseInvoice"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_PurchaseInvoice_ApproveDocument, L("ApproveIMS_PurchaseInvoice"));
+			// PurchaseInvoice Permission
+			context.CreatePermission(PermissionNames.LookUps_PurchaseInvoice, L("PurchaseInvoice"));
+			context.CreatePermission(PermissionNames.LookUps_PurchaseInvoice_Create, L("CreatePurchaseInvoice"));
+			context.CreatePermission(PermissionNames.LookUps_PurchaseInvoice_Edit, L("EditPurchaseInvoice"));
+			context.CreatePermission(PermissionNames.LookUps_PurchaseInvoice_Delete, L("DeletePurchaseInvoice"));
+			context.CreatePermission(PermissionNames.LookUps_PurchaseInvoice_ApproveDocument, L("ApprovePurchaseInvoice"));
 
 
-			// IMS_Item Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_Item, L("IMS_Item"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Item_Create, L("CreateIMS_Item"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Item_Edit, L("EditIMS_Item"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Item_Delete, L("DeleteIMS_Item"));
+			// Item Permission
+			context.CreatePermission(PermissionNames.LookUps_Item, L("Item"));
+			context.CreatePermission(PermissionNames.LookUps_Item_Create, L("CreateItem"));
+			context.CreatePermission(PermissionNames.LookUps_Item_Edit, L("EditItem"));
+			context.CreatePermission(PermissionNames.LookUps_Item_Delete, L("DeleteItem"));
 
-			// IMS_Vendor Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_Vendor, L("IMS_Vendor"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Vendor_Create, L("CreateIMS_Vendor"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Vendor_Edit, L("EditIMS_Vendor"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Vendor_Delete, L("DeleteIMS_Vendor"));
+			// Vendor Permission
+			context.CreatePermission(PermissionNames.LookUps_Vendor, L("Vendor"));
+			context.CreatePermission(PermissionNames.LookUps_Vendor_Create, L("CreateVendor"));
+			context.CreatePermission(PermissionNames.LookUps_Vendor_Edit, L("EditVendor"));
+			context.CreatePermission(PermissionNames.LookUps_Vendor_Delete, L("DeleteVendor"));
 
-			// IMS_Location Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_Location, L("IMS_Location"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Location_Create, L("CreateIMS_Location"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Location_Edit, L("EditIMS_Location"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_Location_Delete, L("DeleteIMS_Location"));
+			// Location Permission
+			context.CreatePermission(PermissionNames.LookUps_Location, L("Location"));
+			context.CreatePermission(PermissionNames.LookUps_Location_Create, L("CreateLocation"));
+			context.CreatePermission(PermissionNames.LookUps_Location_Edit, L("EditLocation"));
+			context.CreatePermission(PermissionNames.LookUps_Location_Delete, L("DeleteLocation"));
 
-			// IMS_ItemCategory Permission
-			context.CreatePermission(PermissionNames.LookUps_IMS_ItemCategory, L("IMS_ItemCategory"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_ItemCategory_Create, L("CreateIMS_ItemCategory"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_ItemCategory_Edit, L("EditIMS_ItemCategory"));
-			context.CreatePermission(PermissionNames.LookUps_IMS_ItemCategory_Delete, L("DeleteIMS_ItemCategory"));
-
-			
+			// ItemCategory Permission
+			context.CreatePermission(PermissionNames.LookUps_ItemCategory, L("ItemCategory"));
+			context.CreatePermission(PermissionNames.LookUps_ItemCategory_Create, L("CreateItemCategory"));
+			context.CreatePermission(PermissionNames.LookUps_ItemCategory_Edit, L("EditItemCategory"));
+			context.CreatePermission(PermissionNames.LookUps_ItemCategory_Delete, L("DeleteItemCategory"));
 
         // Users & Roles
         context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));

@@ -8,7 +8,7 @@ using ERP.Generics.Simple;
 
 namespace ERP.Modules.InventoryManagement.Vendor
 {
-    [AbpAuthorize(PermissionNames.LookUps_IMS_Vendor)]
+    [AbpAuthorize(PermissionNames.LookUps_Vendor)]
     public class VendorAppService : GenericSimpleAppService<IMS_VendorDto, VendorInfo, SimpleSearchDtoBase>
     {
     }
